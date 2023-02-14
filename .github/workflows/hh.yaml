@@ -1,4 +1,4 @@
-name: First Cron Job
+name: First Cron Jobmnmmmmmmmmmmmm
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -6,7 +6,7 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Run a one-line script
+      - name: Run a one-line scriptjmmm
         run: echo Hello, world!
       - name: Generate JSON file during office hours
         run: |
