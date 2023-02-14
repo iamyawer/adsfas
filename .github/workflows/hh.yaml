@@ -1,0 +1,23 @@
+name: First Cron Job
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Generate JSON file during office hours
+        run: |
+          now=$(TZ=Europe/Amsterdam date +"%H:%M")
+          if [[ "$now" > "08:59" && "$now" < "17:01" ]]; then
+            echo '{"message": "Generated JSON file"}' > output.json
+          else
+            echo "yes" > output.txt
+          fi
+      - name: Upload generated file
+        uses: actions/upload-artifact@v2
+        with:
+          name: generated-file
+          path: output.*
