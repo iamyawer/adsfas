@@ -1,5 +1,5 @@
 ---
-name: First Crhhhhhhon Job
+name: First Cron Job
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Run a one-line script
         run: echo Hello, world!
-      - name: Generate JSON file during office hours
       - name: Generate JSON file during office hours
         run: |
           now=$(TZ=Europe/Amsterdam date +"%H:%M")
