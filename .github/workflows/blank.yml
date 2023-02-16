@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v1.1
-          release_name: Release v1.1
+          release_name: Release v1.16
           body: |
             This is the first release
           draft: false
