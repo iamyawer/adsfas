@@ -15,10 +15,26 @@ jobs:
           if [[ "$now" > "08:59" && "$now" < "17:01" ]]; then
             echo '{"message": "Generated JSON file"}' > output.json
           else
-            echo '{"message": "No JSON file generated"}' > output.json
+            echo "yes" > output.txt
           fi
-      - name: Upload generated file
-        uses: actions/upload-artifact@v2
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: generated-file
-          path: output.json
+          tag_name: v1.0
+          release_name: Release v1.0
+          body: |
+            This is the first release
+          draft: false
+          prerelease: false
+      - name: Upload file as release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output.json
+          asset_name: output.json
+          asset_content_type: application/json
